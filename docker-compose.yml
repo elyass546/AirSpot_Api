@@ -5,7 +5,7 @@ services:
       dockerfile: docker/Dockerfile.prod
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "3001:3000"
     environment:
       NODE_ENV: ${NODE_ENV}
       PORT: ${PORT}
@@ -44,7 +44,9 @@ services:
           path: ./package-lock.json
     depends_on:
       - postgres
-      - redis  # Add this dependency
+      - redis
+    networks:
+      - shared
 
   postgres:
     image: postgres:17
@@ -57,14 +59,18 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - shared
 
   redis:
-    image: redis:alpine  # Use alpine for smaller size
+    image: redis:alpine
     restart: unless-stopped
     volumes:
-      - redis_data:/data  # Add this volume for data persistence
+      - redis_data:/data
     ports:
-      - '6378:6379'
+      - "6378:6379"
+    networks:
+      - shared
 
   pgadmin:
     image: dpage/pgadmin4
@@ -73,10 +79,15 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL-admin@postgres.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD-admin}
     ports:
-      - '5050:80'
+      - "5050:80"
     depends_on:
       - postgres
+    networks:
+      - shared
 
 volumes:
   postgres_data:
-  redis_data:  # Add this volume definition
+  redis_data:
+
+networks:
+  shared:
