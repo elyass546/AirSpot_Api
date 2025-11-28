@@ -2,7 +2,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: docker/Dockerfile.local
+      dockerfile: docker/Dockerfile.prod
     restart: unless-stopped
     ports:
       - "3001:3001"
