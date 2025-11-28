@@ -4,8 +4,6 @@ services:
       context: .
       dockerfile: docker/Dockerfile.local
     restart: unless-stopped
-    # env_file:
-    #   - path: .env
     ports:
       - "3000:3000"
     develop:
