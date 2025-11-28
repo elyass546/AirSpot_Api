@@ -6,6 +6,28 @@ services:
     restart: unless-stopped
     ports:
       - "3001:3000"
+    environment:
+      - NODE_ENV: ${NODE_ENV}
+      - PORT: ${PORT}
+      - DB_TYPE: ${DB_TYPE}
+      - DB_HOST: ${DB_HOST}
+      - DB_PORT: ${DB_PORT}
+      - DB_USERNAME: ${DB_USERNAME}
+      - DB_PASSWORD: ${DB_PASSWORD}
+      - DB_NAME: ${DB_NAME}
+      - REDIS_HOST: ${REDIS_HOST}
+      - REDIS_PORT: ${REDIS_PORT}
+      - FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+      - FIREBASE_CLIENT_EMAIL: ${FIREBASE_CLIENT_EMAIL}
+      - FIREBASE_PRIVATE_KEY: ${FIREBASE_PRIVATE_KEY}
+      - FIREBASE_WEB_API_KEY: ${FIREBASE_WEB_API_KEY}
+      - SMTP_HOST: ${SMTP_HOST}
+      - SMTP_PORT: ${SMTP_PORT}
+      - SMTP_USER: ${SMTP_USER}
+      - SMTP_PASS: ${SMTP_PASS}
+      - SMTP_FROM: ${SMTP_FROM}
+      - AUTO_SETUP_MULTITENANCY: ${AUTO_SETUP_MULTITENANCY}
+
     develop:
       watch:
         - action: sync
