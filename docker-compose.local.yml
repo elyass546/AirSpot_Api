@@ -44,7 +44,7 @@ services:
     volumes:
       - redis_data:/data  # Add this volume for data persistence
     ports:
-      - '6379:6379'
+      - '6379:6378'
 
   pgadmin:
     image: dpage/pgadmin4
