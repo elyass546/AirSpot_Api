@@ -164,7 +164,7 @@ export class AuthService {
       // Step 4: Create custom token for the user (client will exchange for ID token)
       const tenantAuth = this.auth
         .tenantManager()
-        .authForTenant(firebaseTenant.tenantId);
+        .authForTenant(tenant.firebase_tenant_id);
 
       const accessToken = await tenantAuth.createCustomToken(firebaseUser.uid, {
         slug: tenant.slug,
